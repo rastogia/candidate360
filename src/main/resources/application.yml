@@ -1,0 +1,67 @@
+spring:
+  application:
+    name: candidate360
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/candidate360}
+    username: ${DB_USERNAME:candidate360}
+    password: ${DB_PASSWORD:candidate360}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+  cache:
+    type: redis
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+server:
+  port: 8080
+app:
+  jwt:
+    secret: ${JWT_SECRET:change-this-to-a-very-long-secret-key-min-32-chars!!}
+    expiration-ms: 86400000
+external:
+  github:
+    token: ${GITHUB_TOKEN:}
+    base-url: https://api.github.com
+  stackoverflow:
+    key: ${STACKOVERFLOW_KEY:}
+    base-url: https://api.stackexchange.com/2.3
+  serper:
+    api-key: ${SERPER_API_KEY:}
+    base-url: https://google.serper.dev
+  gemini:
+    api-key: ${GEMINI_API_KEY:}
+    base-url: https://generativelanguage.googleapis.com
+  openai:
+    api-key: ${OPENAI_API_KEY:}
+    base-url: https://api.openai.com
+  twitter:
+    bearer-token: ${TWITTER_BEARER_TOKEN:}
+    base-url: https://api.twitter.com/2
+  proxycurl:
+    api-key: ${PROXYCURL_API_KEY:}
+    base-url: https://nubela.co/proxycurl/api/v2
+storage:
+  cv-upload-dir: ${CV_UPLOAD_DIR:uploads/cv}
+  report-dir: ${REPORT_DIR:uploads/reports}
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /api-docs
+logging:
+  level:
+    com.recruit.c360: INFO
+    org.springframework.security: WARN
